@@ -1,5 +1,14 @@
 package com.chakriIT.service;
 
-public class EmailService {
+import org.springframework.mail.javamail.JavaMailSender;
 
+public class EmailService {
+	
+	private JavaMailSender mailSender;
+	
+	public boolean sendEmail(String subject, String body, String to) {
+	
+		//Logic
+		return true;
+	}
 }
