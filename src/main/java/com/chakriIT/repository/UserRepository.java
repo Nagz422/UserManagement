@@ -6,7 +6,7 @@ import com.chakriIT.entity.UserEntity;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
-	public boolean exitsByEmail(String email);
+	public boolean existsByEmail(String email);
 	
 	public UserEntity findByEmailAndPwd(String email, String pwd);
 	

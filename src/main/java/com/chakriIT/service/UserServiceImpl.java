@@ -50,31 +50,32 @@ public class UserServiceImpl implements UserService{
 		List<CountryEntity> countries = countryRepo.findAll();
 		
 		return countries.stream()
-				.map(country->mapper.map(countries, CountryDto.class))
+				.map(country->mapper.map(country, CountryDto.class))
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<StateDto> getStates(Integer countryId) {
+		System.out.println("Country Id is :"+countryId);
 		List<StateEntity> states = stateRepo.findByCountryCountryId(countryId);
 		
 		return states.stream()
-				.map(state->mapper.map(states, StateDto.class))
+				.map(state->mapper.map(state, StateDto.class))
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<CityDto> getCities(Integer stateId) {
-		List<CityEntity> cities = cityRepo.findByStateStatId(stateId);
+		List<CityEntity> cities = cityRepo.findByStateStateId(stateId);
 		return cities.stream()
-				.map(city -> mapper.map(cities, CityDto.class))
+				.map(city -> mapper.map(city, CityDto.class))
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public boolean isEmailUnique(String email) {
 		
-		return !userRepo.exitsByEmail(email);
+		return !userRepo.existsByEmail(email);
 	}
 
 	@Override
@@ -95,10 +96,10 @@ public class UserServiceImpl implements UserService{
 		UserEntity savedUser = userRepo.save(user);
 		
 		if(savedUser.getUserId()!=null) {
-			String subject ="";
-			String body = " ";
+			String subject ="Chakri IT - Your Account Created";
+			String body = "<h2> Your Temporary pwd :" +user.getPwd();
 			
-			return emailService.sendEmail(subject, body, userDto.getEMail());
+			return emailService.sendEmail(subject, body, userDto.getEmail());
 		}
 		
 		
@@ -117,13 +118,15 @@ public class UserServiceImpl implements UserService{
 			return dto; */
 			
 			return mapper.map(userEntity, UserDto.class);
+			
+			
 		}
 		return null;
 	}
 
 	@Override
 	public boolean resetPwd(ResetPwdDto resetPwdDto) {
-		UserEntity userEntity = userRepo.findByEmail(resetPwdDto.getEMail());
+		UserEntity userEntity = userRepo.findByEmail(resetPwdDto.getEmail());
 		
 		if(userEntity!=null) {
 			
@@ -160,5 +163,4 @@ public class UserServiceImpl implements UserService{
 		}
 		return buffer.toString();
 	}
-	
 }

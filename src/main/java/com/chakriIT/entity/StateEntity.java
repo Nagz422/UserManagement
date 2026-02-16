@@ -19,11 +19,11 @@ public class StateEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer ststeId;
+	private Integer stateId;
 	
 	private String stateName;
 	
 	@ManyToOne
 	@JoinColumn(name="country_id")
-	private CountryEntity Country;
+	private CountryEntity country;
 }

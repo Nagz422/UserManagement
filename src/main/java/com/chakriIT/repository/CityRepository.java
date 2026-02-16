@@ -8,5 +8,5 @@ import com.chakriIT.entity.CityEntity;
 
 public interface CityRepository extends JpaRepository<CityEntity, Integer>{
 	
-	public List<CityEntity> findByStateStatId(Integer stateId);
+	public List<CityEntity> findByStateStateId(Integer stateId);
 }

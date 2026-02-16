@@ -5,9 +5,11 @@ import lombok.Data;
 @Data
 public class UserDto {
 	
+	private Integer userId;
+	
 	private String name;
 	
-	private String eMail;
+	private String email;
 	
 	private String pwd;
 	
@@ -20,4 +22,5 @@ public class UserDto {
 	private Integer stateId;
 	
 	private Integer cityId;
+	
 }
